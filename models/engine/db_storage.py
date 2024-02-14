@@ -10,7 +10,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from os import getenv
 
-classes = {"Customer": Customer, "Product": Product, "Invoice": Invoice,
+classes = {"Members": Members, "Books": Books, "Issuance": Issuance,
            "Statement": Statement, "User": User}
 
 
