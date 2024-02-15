@@ -5,13 +5,14 @@ from sqlalchemy import Column, String, Float, Integer, Date
 from sqlalchemy import ForeignKey, Table
 from sqlalchemy.orm import relationship
 from models.issuance_books import IssuanceBooks
+from datetime import datetime
 
 
 issuance_book = Table(
     'issuance_book',
     Base.metadata,
     Column('issuance_id', Integer, ForeignKey('issuances.id')),
-    Column('product_id', Integer, ForeignKey('books.id'))
+    Column('books_id', Integer, ForeignKey('books.id'))
 )
 
 
@@ -34,14 +35,32 @@ class Issuance(BaseModel, Base):
     issued_books = relationship('IssuanceBooks', backref='issuance', cascade="all, delete, delete-orphan")
 
 
-def __init__(self, member_id, due_date,
-             books_borrowed, contact_number, total_fee,
-             books=None):
-    """Initializes the issuance"""
-    super().__init__()
-    self.member_id = member_id
-    self.due_date = due_date
-    self.products_ordered = products_ordered
-    self.contact_number = contact_number
-    self.books = books or []
-    self.total_fee = total_fee
+    def __init__(self, member_id, due_date,
+                 books_borrowed, contact_number, total_fee,
+                 books=None):
+        """Initializes the issuance"""
+        super().__init__()
+        self.member_id = member_id
+        self.due_date = due_date
+        self.products_ordered = products_ordered
+        self.contact_number = contact_number
+        self.books = books or []
+        self.total_fee = total_fee
+
+    def issuance_status(self):
+    """Update the status of the issuance based on due date."""
+    if self.return_status != "returned":
+        if self.due_date < datetime.now().date():
+            self.return_status = "overdue"
+        else:
+            self.return_status = "borrowed"
+
+    def calculate_total_fee(self):
+    """Calculate the total fee for the issuance."""
+    if self.return_status == "overdue":
+        total_books = len(self.books)
+        self.total_fee = min(total_books * 50, 500)
+    else:
+        self.total_fee = 0.0
+
+    

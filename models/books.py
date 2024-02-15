@@ -10,7 +10,9 @@ class Books(BaseModel, Base):
     __tablename__ = 'books'
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(255), nullable=False)
-    quantity_in_stock = Column(Float, default=0)
+    original_stock = Column(Float, nullable=False, default=0)
+    current_stock = Column(Float, nullable=False, default=0)
+    author = Column(String(255), nullable=False)
     issuances = relationship('Issuance',
                             secondary='issuance_books',
                             back_populates='books')
@@ -18,8 +20,13 @@ class Books(BaseModel, Base):
 
     def reduce_stock(self, quantity):
         """Updates the quantity in stock"""
-        if self.quantity_in_stock >= quantity:
-            self.quantity_in_stock -= quantity
+        if self.current_stock >= quantity:
+            self.current_stock -= quantity
             return True
         else:
             return False
+
+    def update_current_stock(self):
+    """Updates the current stock based on issued books."""
+        total_borrowed_books = sum(issuance_book.quantity for issuance_book in self.issuances)
+        self.current_stock = max(0, self.original_stock - total_borrowed_books)
