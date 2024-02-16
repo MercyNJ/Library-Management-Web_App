@@ -6,6 +6,7 @@ from models.members import Members
 from models.issuance import Issuance
 from models.statement import Statement
 from models.user import User
+from models.issuance_books import IssuanceBooks
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from os import getenv

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """defines a class Books"""
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, Float
 from sqlalchemy.orm import relationship
 
 
@@ -27,6 +27,6 @@ class Books(BaseModel, Base):
             return False
 
     def update_current_stock(self):
-    """Updates the current stock based on issued books."""
+        """Updates the current stock based on issued books."""
         total_borrowed_books = sum(issuance_book.quantity for issuance_book in self.issuances)
         self.current_stock = max(0, self.original_stock - total_borrowed_books)

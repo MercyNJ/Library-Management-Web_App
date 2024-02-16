@@ -4,7 +4,7 @@
 import cmd
 from datetime import datetime
 import models
-from models.members import Memebers
+from models.members import Members
 from models.base_model import BaseModel
 from models.books import Books
 from models.issuance import Issuance
@@ -137,33 +137,33 @@ class LIBCommand(cmd.Cmd):
 
     
     def do_update(self, arg):
-    """Update an instance based on the class name, id, attribute & value"""
-    args = shlex.split(arg)
+        """Update an instance based on the class name, id, attribute & value"""
+        args = shlex.split(arg)
 
-    if len(args) == 0:
-        print("** class name missing **")
-    elif args[0] in classes:
-        if len(args) > 1:
-            k = args[0] + "." + args[1]
-            if k in models.storage.all():
-                if len(args) > 2:
-                    if len(args) > 3:
-                        try:
-                            value = type(getattr(models.storage.all()[k], args[2]))(args[3])
-                            setattr(models.storage.all()[k], args[2], value)
-                            models.storage.all()[k].save()
-                        except (AttributeError, ValueError):
-                            print("** invalid value for attribute **")
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] in classes:
+            if len(args) > 1:
+                k = args[0] + "." + args[1]
+                if k in models.storage.all():
+                    if len(args) > 2:
+                        if len(args) > 3:
+                            try:
+                                value = type(getattr(models.storage.all()[k], args[2]))(args[3])
+                                setattr(models.storage.all()[k], args[2], value)
+                                models.storage.all()[k].save()
+                            except (AttributeError, ValueError):
+                                print("** invalid value for attribute **")
+                        else:
+                            print("** value missing **")
                     else:
-                        print("** value missing **")
+                        print("** attribute name missing **")
                 else:
-                    print("** attribute name missing **")
+                    print("** no instance found **")
             else:
-                print("** no instance found **")
+                print("** instance id missing **")
         else:
-            print("** instance id missing **")
-    else:
-        print("** class doesn't exist **")
+            print("** class doesn't exist **")
 
 
 

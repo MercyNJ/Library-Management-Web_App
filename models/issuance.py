@@ -30,7 +30,7 @@ class Issuance(BaseModel, Base):
     member_id = Column(Integer, ForeignKey('members.id'), nullable=False)
     books = relationship('Books', secondary=issuance_book,
                             back_populates='issuances')
-    statements = relationship('Statement', secondary='invoice_statement',
+    statements = relationship('Statement', secondary='issuance_statement',
                               back_populates='issuances')
     issued_books = relationship('IssuanceBooks', backref='issuance', cascade="all, delete, delete-orphan")
 
@@ -48,19 +48,19 @@ class Issuance(BaseModel, Base):
         self.total_fee = total_fee
 
     def issuance_status(self):
-    """Update the status of the issuance based on due date."""
-    if self.return_status != "returned":
-        if self.due_date < datetime.now().date():
-            self.return_status = "overdue"
-        else:
-            self.return_status = "borrowed"
+        """Update the status of the issuance based on due date."""
+        if self.return_status != "returned":
+            if self.due_date < datetime.now().date():
+                self.return_status = "overdue"
+            else:
+                self.return_status = "borrowed"
 
     def calculate_total_fee(self):
-    """Calculate the total fee for the issuance."""
-    if self.return_status == "overdue":
-        total_books = len(self.books)
-        self.total_fee = min(total_books * 50, 500)
-    else:
-        self.total_fee = 0.0
+        """Calculate the total fee for the issuance."""
+        if self.return_status == "overdue":
+            total_books = len(self.books)
+            self.total_fee = min(total_books * 50, 500)
+        else:
+            self.total_fee = 0.0
 
     
