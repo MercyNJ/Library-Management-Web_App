@@ -15,7 +15,7 @@ class Books(BaseModel, Base):
     author = Column(String(255), nullable=False)
     issuances = relationship('Issuance',
                             secondary='issuance_books',
-                            back_populates='books')
+                            back_populates='books', viewonly=True)
 
 
     def reduce_stock(self, quantity):
