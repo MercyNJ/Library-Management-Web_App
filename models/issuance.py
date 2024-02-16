@@ -32,7 +32,7 @@ class Issuance(BaseModel, Base):
                             back_populates='issuances')
     statements = relationship('Statement', secondary='issuance_statement',
                               back_populates='issuances')
-    issued_books = relationship('IssuanceBooks', backref='issuance', cascade="all, delete, delete-orphan")
+    issued_books = relationship('IssuanceBooks', back_populates='issuance', cascade="all, delete, delete-orphan")
 
 
     def __init__(self, member_id, due_date,
