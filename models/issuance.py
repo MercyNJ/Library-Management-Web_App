@@ -42,7 +42,7 @@ class Issuance(BaseModel, Base):
         super().__init__()
         self.member_id = member_id
         self.due_date = due_date
-        self.products_ordered = products_ordered
+        self.books_borrowed = books_borrowed
         self.contact_number = contact_number
         self.books = books or []
         self.total_fee = total_fee
