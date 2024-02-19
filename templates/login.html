@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/login_form.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/footer.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header></header>	
+    <div class="container">
+        <img src="../static/images/LoginImage.png" alt="Login Image" class="image">
+        <div class="login-container">
+            <h1>Login</h1>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <form method="POST">
+                {{ login_form.hidden_tag() }}
+                <p>
+                    {{ login_form.username.label }}
+                    {{ login_form.username() }}
+                </p>
+                <p>
+                    {{ login_form.password.label }}
+                    {{ login_form.password() }}
+                </p>
+                <p>
+                    {{ login_form.remember.label }}
+                    {{ login_form.remember() }}
+                </p>
+                <p>
+                    {{ login_form.login() }}
+                </p>
+            </form>
+            <p><a href="{{ url_for('user.forgot_password') }}">Forgot Password</a></p>
+        </div>
+    </div>
+    <footer>
+      <p>&copy; 2023 Library Management. All rights reserved</p>
+ </footer>
+</body>
+</html>
