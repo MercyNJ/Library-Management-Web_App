@@ -1,0 +1,45 @@
+/* Updated Navigation Styles */
+.horizontal-nav {
+    overflow: hidden;
+    width: 100%;
+}
+
+.horizontal-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 100%; /* Make sure the list takes the full width */
+}
+
+.horizontal-nav li {
+    margin-right: 20px;
+    flex-grow: 1; /* Make each list item take equal width */
+}
+
+.horizontal-nav a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    width: 100%; /* Make the anchor element take the full width */
+    text-align: center; /* Optional: Center text within the anchor */
+}
+
+.horizontal-nav a:hover {
+    background-color: #555;
+}
+
+.has-submenu {
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.has-submenu:hover .submenu {
+    display: block;
+}

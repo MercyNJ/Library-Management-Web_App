@@ -1,0 +1,82 @@
+/* sidebar.css */
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    height: 100%;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px;
+    border-bottom: 1px solid #555;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Styling for sub-menu items */
+.sidebar ul ul {
+    padding-left: 20px;
+    margin-top: 5px;
+}
+
+/* main-content.css */
+.main-content {
+    margin-left: 250px; /* Match the width of the sidebar */
+    padding: 20px;
+}
+
+/* Additional styling for content */
+.main-content h1 {
+    font-size: 45px;
+}
+
+/* Style the container for the sidebar and main content */
+.page-container {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+}
+img {
+    max-width: 100%;
+    max-height: auto;
+}
+
+/* Responsive styles for small screens */
+@media only screen and (max-width: 600px) {
+    .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+    }
+
+    .sidebar ul {
+        text-align: center;
+    }
+
+    .sidebar li {
+        padding: 5px;
+        border-bottom: 1px solid #555;
+        margin-bottom: 5px;
+    }
+
+    .sidebar ul ul {
+        padding-left: 0;
+    }
+
+    .page-container {
+        flex-direction: column;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}

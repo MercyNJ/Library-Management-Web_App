@@ -1,0 +1,13 @@
+header {
+    background-color: #6699AA;
+    color: black;
+    height: 30px;
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header a {
+    color: black;
+}
