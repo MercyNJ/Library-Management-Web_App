@@ -52,7 +52,7 @@
                         <td>{{ member.contact }}</td>
                         <td>{{ member.total_fee_due }}</td>
                         <td>
-                            <a href="{{ url_for('members.update_members_form', member_id=member.id) }}">Edit</a>
+                            <a href="{{ url_for('members.update_member_form', member_id=member.id) }}">Edit</a>
                         </td>
                         <td>
                             <a href="#" class="delete-link" data-member-id="{{
@@ -62,7 +62,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        <a href="{{ url_for('members.add_members_form') }}">Add New Member</a>
+        <a href="{{ url_for('members.add_member_form') }}">Add New Member</a>
     </div>
     <footer>
       <p>&copy; 2024 Library Management. All rights reserved</p>

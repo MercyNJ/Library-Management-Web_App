@@ -29,13 +29,13 @@
         </nav>
     </header>	
     <h1>Add New Member</h1>
-    <form id="addMembersForm" method="post" action="{{ url_for('members.add_customers_form') }}">
-        <label for="members_name">Name:</label>
-        <input type="text" name="members_name" required><br>
-        <label for="members_email">Email:</label>
-        <input type="email" name="members_email" required><br>
-        <label for="members_contact">Contact:</label>
-        <input type="text" name="members_contact" required><br>
+    <form id="addMembersForm" method="post" action="{{ url_for('members.add_member_form') }}">
+        <label for="member_name">Name:</label>
+        <input type="text" name="member_name" required><br>
+        <label for="member_email">Email:</label>
+        <input type="email" name="member_email" required><br>
+        <label for="member_contact">Contact:</label>
+        <input type="text" name="member_contact" required><br>
         <button type="submit">Add Member</button>
     </form>
     <footer>
@@ -43,4 +43,3 @@
     </footer>
 </body>
 </html>
-

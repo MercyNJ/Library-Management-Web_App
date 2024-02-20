@@ -29,13 +29,13 @@
         </nav>
     </header>	
     <h1>Update Member</h1>
-    <form id="updateMembersForm" method="post" action="{{ url_for('members.update_members_form', members_id=member.id) }}">
-        <label for="members_name">Name:</label>
-        <input type="text" name="members_name" value="{{ member.name }}" required><br>
-        <label for "members_email">Email:</label>
-        <input type="email" name="members_email" value="{{ member.email }}" required><br>
-        <label for "members_contact">Contact:</label>
-        <input type="text" name="members_contact" value="{{ member.contact }}" required><br>
+    <form id="updateMembersForm" method="post" action="{{ url_for('members.update_member_form', member_id=member.id) }}">
+        <label for="member_name">Name:</label>
+        <input type="text" name="member_name" value="{{ member.name }}" required><br>
+        <label for "member_email">Email:</label>
+        <input type="email" name="member_email" value="{{ member.email }}" required><br>
+        <label for "member_contact">Contact:</label>
+        <input type="text" name="member_contact" value="{{ member.contact }}" required><br>
         <button type="submit">Update Member</button>
     </form>
     <footer>
