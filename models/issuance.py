@@ -52,6 +52,7 @@ class Issuance(BaseModel, Base):
         if self.return_status != "returned":
             if self.due_date < datetime.now().date():
                 self.return_status = "overdue"
+                self.calculate_total_fee()
             else:
                 self.return_status = "borrowed"
 
