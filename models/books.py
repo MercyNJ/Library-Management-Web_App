@@ -25,3 +25,17 @@ class Books(BaseModel, Base):
             return True
         else:
             return False
+
+    def update_current_stock(self):
+        """Update the current stock of the book."""
+        total_issued_quantity = sum(
+                issuance.quantity for issuance in self.issuances)
+        total_returned_quantity = sum(
+                issuance.quantity for issuance in self.issuances \
+                        if issuance.return_status == "returned")
+        self.current_stock = \
+                (self.original_stock - total_issued_quantity) + total_returned_quantity
+        if self.current_stock < 0:
+            self.current_stock = 0
+
+        self.save()

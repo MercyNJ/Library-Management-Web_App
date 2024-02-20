@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Books</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/table.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/common.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/navigation.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <nav class="horizontal-nav">
+            <ul>
+		<li><a href="/">Home</a></li>
+                <li><a href="{{ url_for('user.members_listing') }}">View Members</a></li>
+                <li><a href="{{ url_for('user.books_listing') }}">View Books</a></li>
+                <li class="has-submenu">
+                    <a href="/issuances">Make an Issuance</a>
+                    <ul class="submenu">
+                        <li><a href="{{ url_for('user.issuance_listing') }}">View Issuances</a></li>
+                        <li><a href="/create_issuance">Add an Issuance</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ url_for('user.statement_listing') }}">Open Issuances</a></li>
+                <li><a href="{{ url_for('user.change_password') }}">Change Password</a></li>
+                <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>	
+    <h1>View Books</h1>
+    <div class="content">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Original Stock</th>
+		<th>Current Stock</th>
+                <th>Actions</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.name }}</td>
+		    <td>{{ book.author }}</td>
+                    <td>{{ book.original_stock|int }}</td>
+                    <td>{{ book.current_stock|int }}</td>
+                    <td>
+                        <a href="{{ url_for('books.update_book_form', book_id=book.id) }}">Edit</a>
+                    </td>
+                    <td>
+                            <a href="#" onclick="confirmDelete('{{ url_for('books.delete_book', book_id=book.id) }}')">Delete</a>
+                        </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('books.add_book_form') }}">Add a New Book</a>
+    </div>
+    <footer>
+      <p>&copy; 2024 Library Management. All rights reserved</p>
+    </footer>
+    
+    <script>
+        function confirmDelete(deleteUrl) {
+            var confirmDelete = confirm("Are you sure you want to delete this book?");
+            if (confirmDelete) {
+                window.location.href = deleteUrl;
+            }
+        }
+    </script>
+</body>
+</html>
