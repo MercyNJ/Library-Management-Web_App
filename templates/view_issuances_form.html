@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Invoices</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/table.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/common.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/navigation.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <nav class="horizontal-nav">
+	    <ul>
+		<li><a href="/">Home</a></li>
+                <li><a href="{{ url_for('user.members_listing') }}">View Members</a></li>
+                <li><a href="{{ url_for('user.books_listing') }}">View Books</a></li>
+                <li class="has-submenu">
+                    <a href="/issuances">Make an Issuance</a>
+                    <ul class="submenu">
+                        <li><a href="{{ url_for('user.issuance_listing') }}">View Issuances</a></li>
+                        <li><a href="/create_issuance">Add an Issuance</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ url_for('user.statement_listing') }}">Open Issuances</a></li>
+                <li><a href="{{ url_for('user.change_password') }}">Change Password</a></li>
+                <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>	
+    <h1>View Issuances</h1>
+    <div class="content">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Books Borrowed</th>
+                    <th>Member Name</th>
+                    <th>Return Status</th>
+                    <th>Total Fee</th>
+                    <th>Member ID</th>
+                    <th>Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>View</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for issuance in issuances %}
+                    <tr>
+                        <td>{{ issuance.id }}</td>
+                        <td>{{ issuance.books_borrowed }}</td>
+                        <td>{{ issuance.member.name }}</td>
+                        <td>{{ issuance.return_status }}</td>
+                        <td>{{ issuance.total_fee }}</td>
+                        <td>{{ issuance.member_id }}</td>
+                        <td>{{ issuance.created_at }}</td>
+                        <td>
+                            <a href="#" class="delete-link" data-issuance-id="{{
+                            issuance.id }}">Delete</a>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('issuance.view_issuance_template', issuance_id=issuance.id) }}">View</a>
+                        </td>
+                        
+                        <td>
+                            <a href="{{ url_for('issuance.update_issuance_form', issuance_id=issuance.id) }}">Update</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('issuance.create_issuance') }}">Create Issuance</a>
+    </div>
+    <footer>
+      <p>&copy; 2024 Library Management. All rights reserved</p>
+    </footer>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var deleteLinks = document.querySelectorAll('.delete-link');
+
+        deleteLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                var issuanceId = link.getAttribute('data-issuance-id');
+                var deleteUrl = '{{ url_for('issuance.delete_issuance', issuance_id='') }}' + issuanceId;
+                confirmDelete(deleteUrl);
+            });
+        });
+
+        function confirmDelete(deleteUrl) {
+            var confirmDelete = confirm("Are you sure you want to delete this issuance?");
+            if (confirmDelete) {
+                window.location.href = deleteUrl;
+            }
+        }
+    });
+    </script>
+</body>
+</html>

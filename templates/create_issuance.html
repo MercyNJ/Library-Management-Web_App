@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Invoice</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/create_form.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/navigation.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <nav class="horizontal-nav">
+	    <ul>
+		<li><a href="/">Home</a></li>
+                <li><a href="{{ url_for('user.members_listing') }}">View Members</a></li>
+                <li><a href="{{ url_for('user.books_listing') }}">View Books</a></li>
+                <li class="has-submenu">
+                    <a href="/issuances">Make an Issuance</a>
+                    <ul class="submenu">
+                        <li><a href="{{ url_for('user.issuance_listing') }}">View Issuances</a></li>
+                        <li><a href="/create_issuance">Add an Issuance</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ url_for('user.statement_listing') }}">Open Issuances</a></li>
+                <li><a href="{{ url_for('user.change_password') }}">Change Password</a></li>
+                <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>	
+    <h1>Create New Issuance</h1>
+
+    <form id="createIssuanceForm" method="post" action="{{ url_for('issuance.create_issuance') }}">
+        <label for="member">Member:</label>
+        <select name="member" required>
+            <option value="" disabled selected>Select Member</option>
+            {% for member in members %}
+                <option value="{{ member.id }}">{{ member.name }}</option>
+            {% endfor %}
+        </select>
+	<div id="book-list">
+	    <div class="book-entry">
+	        
+                <label for="book">Book:</label>
+                <select name="book" required>
+                    <option value="" disabled selected>Select Book</option>
+                    {% for book in books %}
+                        <option value="{{ book.id }}">{{ book.name }}</option>
+                    {% endfor %}
+          	    </select>
+
+        	<label for="quantity">Quantity:</label>
+        	<input type="number" name="quantity" required min="1">
+        	
+        	<button type="button" class="remove-book">Remove Book</button>
+            </div>
+        </div>
+        <button type="button" id="add-book"> Add Book</button>
+
+        <label for="due_date">Due Date:</label>
+        <input type="date" name="due_date" required>
+        <label for="total_fee">Total Fee:</label>
+        <input type="number" name="total_fee">
+        
+        <button type="submit">Save Issuance</button>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    	var addButton = document.getElementById('add-book');
+    	var bookList = document.getElementById('book-list');
+
+    	addButton.addEventListener('click', function() {
+            var bookEntry = document.createElement('div');
+            bookEntry.classList.add('book-entry');
+
+            bookEntry.innerHTML = `
+                <label for="book">Book:</label>
+                <select name="book" required>
+                    <option value="" disabled selected>Select Book</option>
+                    {% for book in books %}
+                        <option value="{{ book.id }}">{{ book.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity" required min="1">
+
+                <button type="button" class="remove-book">Remove Book</button>
+            `;
+
+            bookList.appendChild(bookEntry);
+
+            // Add event listener to the new "Remove Book" button
+            var removeButton = bookEntry.querySelector('.remove-book');
+            removeButton.addEventListener('click', function() {
+                bookEntry.remove();
+           });
+        });
+    });
+    </script>
+</body>
+</html>

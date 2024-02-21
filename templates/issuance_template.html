@@ -1,0 +1,76 @@
+<!DOCTYPE.html>
+<html>
+<head>
+    <title>Issuance</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/table.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/issuance_template.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="content-container">
+        <div id="issuance-header">
+            <img src="../static/images/logo.png" alt="Library Logo">
+            <p>Jamii House, suit 600 Wakenya Rd</p>
+            <p>Email: publiclibrarykenya.co.ke</p>
+            <p>Phone: 0765433333</p>
+        </div>
+        <div id="Title">
+            <p>ISSUANCE<span id="issuanceTitle"></span></p>
+        </div>
+        <div id="issuance-details">
+            <div id="left-section">
+                
+                <p>ID: <span id="issuanceId">{{ issuance.id }}</span></p>
+                <p>Date: <span id="issuanceDate">{{ issuance.created_at }}</span></p>
+                <p>Due Date: <span id="dueDate">{{ issuance.due_date }}</span></p>
+            </div>
+
+            <div id="right-section">
+                <h3>Issue TO</h3>
+                <p> <span id="issueToMember">{{ issuance.member.name }}</span></p>
+            </div>
+        </div>
+
+        <table id="issuanceTable">
+            <thead>
+                <tr>
+                    <th>Description/Book</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.name }}</td>
+                        <td>{{ quantities[loop.index0] }}</td>
+                    </tr>
+                {% endfor %}
+                
+                {% set empty_rows = 10 - (books|length) %}
+                {% if empty_rows > 0 %}
+                    {% for _ in range(empty_rows) %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+        <div class="totalFee">
+        <div>Total Fee: {{ issuance.total_fee }}</div>
+        </div>
+        <div id="total-books">
+            <p>Total Books: {{ total_books }}</p>
+        </div>
+
+        <div id="comments">
+            <label for="comments">Comments:</label>
+            <p>Notice: Members are responsible for returning borrowed books on time and in good condition. A late fee of Ksh 50 per book will be charged for items not returned within the due date. Additionally, members with more than 10 overdue books are ineligible to borrow any further items until the overdue books are returned.</p>
+        </div>
+    </div>
+    <a href="{{ url_for('issuance.download_issuance_pdf', issuance_id=issuance.id, quantities=quantities, total_books=total_books) }}" target="_blank">Download PDF</a>
+</body>
+</html>

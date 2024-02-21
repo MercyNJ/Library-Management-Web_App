@@ -38,7 +38,7 @@ def view_issuances():
     try:
         check_status()
         issuances = storage.all(Issuance).values()
-        issuances = sorted(invoices, key=lambda k: k.id)
+        issuances = sorted(issuances, key=lambda k: k.id)
         return render_template('view_issuances_form.html', issuances=issuances)
     except Exception as e:
         return "Error: {}".format(str(e))
@@ -143,40 +143,10 @@ def issuance_template(issuance_id):
 
 
 
-@issuance_bp.route(
-    '/update_issuance_form/<issuance_id>', methods=['GET', 'POST'])
+@issuance_bp.route('/update_issuance_form/<issuance_id>', methods=['GET', 'POST'])
 @login_required
 def update_issuance_form(issuance_id):
-    """allows librarian to modify an issuance &  handle book returns"""
-    try:
-        issuance_id = int(issuance_id)
-        issuance = storage.get(Issuance, issuance_id)
-        if request.method == 'POST':
-            if issuance:
-                issuance.return_status = request.form.get('returned')
-                issuance.issuance_status()
-                issuance.save()
-
-                for book in issuance.books:
-                    book.update_current_stock()
-
-                return redirect(url_for('issuance.view_issuances'))
-            else:
-                return "Issuance not found"
-        elif request.method == 'GET':
-            if issuance:
-                return render_template(
-                    'update_issuance_form.html', issuance=issuance)
-            else:
-                return "Issuance not found"
-    except Exception as e:
-        return "Error: {}".format(str(e))
-
-
-
-@issuance_bp.route('/update_issuance_form_two/<issuance_id>', methods=['GET', 'POST'])
-@login_required
-def update_issuance_form_two(issuance_id):
+     """allows librarian to modify an issuance &  handle book returns"""
     try:
         issuance_id = int(issuance_id)
         issuance = storage.get(Issuance, issuance_id)
@@ -219,7 +189,7 @@ def update_issuance_form_two(issuance_id):
                 for book_id, order in zip(books_ids, orders):
                     book = models.storage.get(Books, int(book_id))
                     if book:
-                        list_books = invoice.issued_books
+                        list_books = issuance.issued_books
                         old_quantity = next((ib.quantity for ib in list_books if ib.book_id == int(book_id)), 0)
                         quantity_difference = int(order) - old_quantity
                         new_issuance_book = IssuanceBooks(
@@ -245,7 +215,7 @@ def update_issuance_form_two(issuance_id):
                 list_books = issuance.issued_books
 
                 return render_template(
-                    'update_issuance_form_two.html', issuance=issuance,
+                    'update_issuance_form.html', issuance=issuance,
                     members=members, books=books,
                     list_books=list_books, quantities=quantities)
             else:

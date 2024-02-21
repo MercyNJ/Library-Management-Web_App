@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Issuance</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/form.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/navigation.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <nav class="horizontal-nav">
+	    <ul>
+		<li><a href="/">Home</a></li>
+                <li><a href="{{ url_for('user.members_listing') }}">View Members</a></li>
+                <li><a href="{{ url_for('user.books_listing') }}">View Books</a></li>
+                <li class="has-submenu">
+                    <a href="/issuances">Make an Issuance</a>
+                    <ul class="submenu">
+                        <li><a href="{{ url_for('user.issuance_listing') }}">View Issuances</a></li>
+                        <li><a href="/create_issuance">Add an Issuance</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ url_for('user.statement_listing') }}">Open Issuances</a></li>
+                <li><a href="{{ url_for('user.change_password') }}">Change Password</a></li>
+                <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Update Issuance </h1>
+    <form id="updateIssuanceForm" method="post" action="{{ url_for('issuance.update_issuance_form', issuance_id=issuance.id) }}">
+        
+        <!-- Dropdown for selecting Memeber -->
+        <label for="member">Member:</label>
+        <select name="member" required>
+            <option value="" disabled selected>Select Member</option>
+            {% for member in members %}
+                <option value="{{ member.id }}" {% if member.id == issuance.member.id %}selected{% endif %}>{{ member.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+
+        <!-- Book List Section -->
+    <div id="book-list">
+        {% for issuance_book in list_books %}
+            <div class="book-entry">
+                <label for="book">Book:</label>
+                <select name="book" required>
+                    <option value="" disabled selected>Select Book</option>
+                    {% for b in books %}
+                        {% if b.id == issuance_book.book_id %}
+                            <option value="{{ b.id }}" selected>{{ b.name }}</option>
+                        {% else %}
+                            <option value="{{ b.id }}">{{ b.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity" required min="1" value="{{ issuance_book.quantity }}">
+
+                <button type="button" class="remove-book">Remove Book</button>
+            </div>
+        {% endfor %}
+    </div>
+
+
+        <button type="button" id="add-book"> Add Book</button>
+
+        <!-- Other Issuance Details -->
+        <label for="total_fee">Total Fee:</label>
+        <input type="number" name="total_fee" value="{{ issuance.total_fee }}">
+        
+        <label for="due_date">Due Date:</label>
+        <input type="date" name="due_date" value="{{ issuance.due_date }}">
+    
+        <button type="submit">Update Issuance</button>
+    </form>
+
+    <footer>
+        <p>&copy; 2024 Library Management. All rights reserved</p>
+    </footer>
+
+
+    <!-- JavaScript for dynamically adding/removing book entries -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var addButton = document.getElementById('add-book');
+        var bookList = document.getElementById('book-list');
+
+        addButton.addEventListener('click', function() {
+            var bookEntry = document.createElement('div');
+            bookEntry.classList.add('book-entry');
+
+            productEntry.innerHTML = `
+                <label for="book">Book:</label>
+                <select name="book" required>
+                    <option value="" disabled selected>Select Book</option>
+                    {% for b in books %}
+                        <option value="{{ b.id }}">{{ b.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity" required min="1">
+
+                <button type="button" class="remove-book">Remove Book</button>
+            `;
+
+            bookList.appendChild(bookEntry);
+        });
+
+        // Use event delegation to handle "Remove Book" button clicks
+        bookList.addEventListener('click', function(event) {
+            var target = event.target;
+            if (target.classList.contains('remove-book')) {
+                target.closest('.book-entry').remove();
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
