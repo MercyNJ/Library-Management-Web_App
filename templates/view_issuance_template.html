@@ -27,21 +27,21 @@
 
             <div id="right-section">
                 <h3>Issue TO</h3>
-                <p> <span id="issueToMember">{{ issuance.member.name }}</span></p>
+                <p> <span id="issueToMember">{{ issuance.members.name }}</span></p>
             </div>
         </div>
 
         <table id="issuanceTable">
             <thead>
                 <tr>
-                    <th>Description/Book</th>
+                    <th>Book</th>
                     <th>Quantity</th>
                 </tr>
             </thead>
             <tbody>
                 {% for bookz in list_books %}
                     <tr>
-                        <td>{{ bookz.book.name }}</td>
+                        <td>{{ bookz.books.name }}</td>
                         <td>{{ bookz.quantity }}</td>
                     </tr>
                 {% endfor %}

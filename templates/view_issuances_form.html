@@ -51,7 +51,7 @@
                 {% for issuance in issuances %}
                     <tr>
                         <td>{{ issuance.id }}</td>
-                        <td>{{ issuance.total_books_borrowed() }}</td>
+                        <td>{{ issuance.books_borrowed }}</td>
                         <td>{{ issuance.members.name }}</td>
                         <td>{{ issuance.return_status }}</td>
                         <td>{{ issuance.total_fee }}</td>

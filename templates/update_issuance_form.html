@@ -37,7 +37,7 @@
         <select name="member" required>
             <option value="" disabled selected>Select Member</option>
             {% for member in members %}
-                <option value="{{ member.id }}" {% if member.id == issuance.member.id %}selected{% endif %}>{{ member.name }}
+                <option value="{{ member.id }}" {% if member.id == issuance.members.id %}selected{% endif %}>{{ member.name }}
                 </option>
             {% endfor %}
         </select>
