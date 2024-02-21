@@ -146,7 +146,7 @@ def issuance_template(issuance_id):
 @issuance_bp.route('/update_issuance_form/<issuance_id>', methods=['GET', 'POST'])
 @login_required
 def update_issuance_form(issuance_id):
-     """allows librarian to modify an issuance &  handle book returns"""
+    """allows librarian to modify an issuance &  handle book returns"""
     try:
         issuance_id = int(issuance_id)
         issuance = storage.get(Issuance, issuance_id)
