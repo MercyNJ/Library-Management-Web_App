@@ -124,7 +124,10 @@ def issuance_template(issuance_id):
         issuance_id = int(issuance_id)
         issuance = storage.get(Issuance, issuance_id)
         if issuance:
-            member_name = issuance.members.name
+            member_id = issuance.member_id
+            member = storage.get(Members, member_id)
+            member_name = member.name
+            '''member_name = issuance.members.name'''
             books = issuance.books
             total_fee = issuance.total_fee
             quantities = [int(q) for q in request.args.getlist('quantities')]
