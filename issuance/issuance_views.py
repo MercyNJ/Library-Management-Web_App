@@ -86,8 +86,8 @@ def create_issuance():
                 due_date=request.form.get('due_date'))
             new_issuance.save()
 
-            for book in books:
-                book.update_current_stock()
+            '''for book in books:
+                book.update_current_stock()'''
 
             # Create IssuanceBooks records for each book selected in the issuance.
             for book_id, order in zip(book_ids, orders):
