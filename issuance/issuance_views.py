@@ -53,7 +53,7 @@ def create_issuance():
     if request.method == 'POST':
         try:
             member_id = int(request.form.get('member'))
-            books_ids = request.form.getlist('books')
+            book_ids = request.form.getlist('books')
             orders = request.form.getlist('quantity')
             
             member = models.storage.get(Members, member_id)
@@ -74,14 +74,14 @@ def create_issuance():
 
             # Calculate total books ordered ,create new Issuance object & save.
             quantities_cpy = quantities.copy()
-            total_books_ordered = 0
+            books_borrowed = 0
             for q in quantities_cpy:
-                total_books_ordered += int(q)
+                books_borrowed += int(q)
 
             new_issuance = Issuance(
                 member_id=member.id, books=books,
                 contact_number=member.contact,
-                total_books_ordered=total_books_ordered,
+                books_borrowed=books_borrowed,
                 total_fee=total_fee,
                 due_date=request.form.get('due_date'))
             new_issuance.save()
@@ -124,10 +124,7 @@ def issuance_template(issuance_id):
         issuance_id = int(issuance_id)
         issuance = storage.get(Issuance, issuance_id)
         if issuance:
-            member_id = issuance.member_id
-            member = storage.get(Members, member_id)
-            member_name = member.name
-            '''member_name = issuance.members.name'''
+            member_name = issuance.members.name
             books = issuance.books
             total_fee = issuance.total_fee
             quantities = [int(q) for q in request.args.getlist('quantities')]
@@ -137,8 +134,7 @@ def issuance_template(issuance_id):
             return render_template(
                 'issuance_template.html', issuance=issuance,
                 member_name=member_name, books=books,
-                quantities=quantities, total_books=total_books,
-                total_fee=total_fee)
+                quantities=quantities, total_books=total_books)
         else:
             return "Issuance not Found"
     except Exception as e:
@@ -158,7 +154,7 @@ def update_issuance_form(issuance_id):
             if issuance:
                 # Retrieve updated values from the form
                 member_id = int(request.form.get('member'))
-                books_ids = request.form.getlist('books')
+                book_ids = request.form.getlist('books')
                 orders = request.form.getlist('quantity')
                 return_status = request.form.get('return_status') or 'borrowed'
                 total_fee = int(request.form.get('total_fee'))
@@ -189,7 +185,7 @@ def update_issuance_form(issuance_id):
                     models.storage.delete(issuance_book)
 
 
-                for book_id, order in zip(books_ids, orders):
+                for book_id, order in zip(book_ids, orders):
                     book = models.storage.get(Books, int(book_id))
                     if book:
                         list_books = issuance.issued_books

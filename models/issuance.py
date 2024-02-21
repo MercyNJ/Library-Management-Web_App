@@ -64,4 +64,10 @@ class Issuance(BaseModel, Base):
         else:
             self.total_fee = 0.0
 
+    '''def total_books_borrowed(self):
+        """Calculate the total number of books borrowed."""
+        total_books_borrowed = sum(
+                issuance_book.quantity for issuance_book in self.issued_books)
+        return total_books_borrowed'''
+
     
