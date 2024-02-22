@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>REMINDER OF OUTSTANDING ISSUANCES</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/table.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/statement.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        @media print {
+            /* Hide elements not within the "statement-container" when printing */
+            body > *:not(#statement-container) {
+                display: none;
+            }
+            a[href="download_statement_pdf"] {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="statement-container">
+        <h1>REMINDER OF OUTSTANDING ISSUANCES</h1>
+        <div id="statement-logo">
+            <img src="../static/images/librarylogo.jpg" alt="Library Logo">
+        </div>
+        <div class="statement-header">
+           <div>Date: {{ date_created }}</div>
+           <div>Member Name: {{ statement.member_name }}</div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date of Issuance</th>
+                    <th>Return Status</th>
+                    <th>Issuance ID</th>
+                    <th>Total Outstanding Fee</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for issuance in statement.issuances %}
+                    <tr>
+                        <td>{{ issuance.created_at }}</td>
+                        <td>{{ issuance.return_status }}</td>
+                        <td>{{ issuance.id }}</td>
+                        <td>{{ issuance.total_fee }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="total-fee">Total Outstanding Fee: {{ statement.outstanding_fee }}</div>
+    </div>
+    <a href="{{ url_for('statement.download_statement_pdf', statement_id=statement.id) }}">Download Statement</a>
+    <button onclick="printStatement()">Print Statement</button>
+    <script>
+    	function printStatement() {
+            var statementContainer = document.getElementById('statement-container');
+            var contentToPrint = statementContainer.cloneNode(true); // Clone the statement-container
+            var newWindow = window.open('', '_blank'); // Open a new window or create an iframe
+
+            newWindow.document.write(contentToPrint.innerHTML);
+            newWindow.document.write('</body></html>');
+
+            newWindow.document.close();
+            newWindow.print();
+            newWindow.close();
+        }
+    </script>
+</body>
+</html>

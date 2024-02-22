@@ -1,0 +1,87 @@
+@page {
+  size: A4;
+  margin: 1.5cm;
+}
+
+#statement-container {
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  flex-grow: 1;
+  margin-bottom: 40px;
+}
+
+#statement-logo {
+  top: 25px;
+  left: 20px;
+  max-height: 270px;
+  max-height: 300px;
+}
+
+img {
+  max-height: 300px;
+  max-width: 300px;
+}
+
+
+#statement-container h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+
+.statement-header {
+  top: 95px;
+  position: absolute;
+  right: 35px;
+  text-align: right;
+  max-width: 350px;
+}
+
+
+.statement-header div {
+  margin-bottom: 5px;
+}
+
+
+.total-fee {
+  font-weight: bold;
+  text-align: right;
+  margin-top: 20px;
+}
+
+
+a[href="download_statement_pdf"], button {
+  display: block;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+
+}
+
+button {
+  position: fixed;
+  top: 80%;
+}
+a {
+  position: fixed;
+  top: 75%;
+}
+
+
+a[href="download_statement_pdf"]:hover, button:hover {
+  background-color: #0056b3;
+}
+
+table {
+  margin-top: 20px;
+}

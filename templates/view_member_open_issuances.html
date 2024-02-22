@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>STATEMENT OF REMINDER: OUTSTANDING ISSUANCES</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/table.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/navigation.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <nav class="horizontal-nav">
+	    <ul>
+		<li><a href="/">Home</a></li>
+                <li><a href="{{ url_for('user.members_listing') }}">View Members</a></li>
+                <li><a href="{{ url_for('user.books_listing') }}">View Books</a></li>
+                <li class="has-submenu">
+                    <a href="/issuances">Make an Issuance</a>
+                    <ul class="submenu">
+                        <li><a href="{{ url_for('user.issuance_listing') }}">View Issuances</a></li>
+                        <li><a href="/create_issuance">Add an Issuance</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ url_for('user.statement_listing') }}">Open Issuances</a></li>
+                <li><a href="{{ url_for('user.change_password') }}">Change Password</a></li>
+                <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>	
+    <h1>Oustanding Issuances for {{ member.name }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Books Borrowed</th>
+                <th>Contact Number</th>
+                <th>Return Status</th>
+                <th>Member Name</th>
+                <th>Date</th>
+                <th>Total Outstanding Fee</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for issuance in issuances %}
+                <tr>
+                    <td>{{ issuance.id }}</td>
+                    <td>{{ issuance.books_borrowed }}</td>
+                    <td>{{ issuance.contact_number }}</td>
+                    <td>{{ issuance.return_status }}</td>
+                    <td>{{ issuance.members.name }}</td>
+                    <td>{{ issuance.created_at }}</td>
+                    <td>{{ issuance.total_fee }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('statement.generate_statement', issuances=issuances.id, member_id=member.id) }}">Generate Statement</a>
+    <footer>
+      <p>&copy; 2024 Library Management. All rights reserved</p>
+    </footer>
+</body>
+</html>
