@@ -36,4 +36,3 @@ class Members(BaseModel, Base):
     def can_make_issuance(self):
         """Check if a new issuance can be made to the member."""
         return self.total_fee_due < 500
-

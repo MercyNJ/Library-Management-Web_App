@@ -32,7 +32,6 @@
     <h1>Update Issuance </h1>
     <form id="updateIssuanceForm" method="post" action="{{ url_for('issuance.update_issuance_form', issuance_id=issuance.id) }}">
         
-        <!-- Dropdown for selecting Memeber -->
         <label for="member">Member:</label>
         <select name="member" required>
             <option value="" disabled selected>Select Member</option>
@@ -43,7 +42,6 @@
         </select>
 
 
-        <!-- Book List Section -->
     <div id="book-list">
         {% for issuance_book in list_books %}
             <div class="book-entry">
@@ -51,7 +49,7 @@
                 <select name="book" required>
                     <option value="" disabled selected>Select Book</option>
                     {% for b in books %}
-                        {% if b.id == issuance_book.book_id %}
+                        {% if b.id == issuance_book.books_id %}
                             <option value="{{ b.id }}" selected>{{ b.name }}</option>
                         {% else %}
                             <option value="{{ b.id }}">{{ b.name }}</option>
@@ -62,7 +60,7 @@
                 <label for="quantity">Quantity:</label>
                 <input type="number" name="quantity" required min="1" value="{{ issuance_book.quantity }}">
 
-                <button type="button" class="remove-book">Remove Book</button>
+                <button type="button" class="remove-product">Remove Book</button>
             </div>
         {% endfor %}
     </div>
@@ -81,7 +79,7 @@
     </form>
 
     <footer>
-        <p>&copy; 2024 Library Management. All rights reserved</p>
+        <p>&copy; 2024 LIbrary Management. All rights reserved</p>
     </footer>
 
 
@@ -95,7 +93,7 @@
             var bookEntry = document.createElement('div');
             bookEntry.classList.add('book-entry');
 
-            productEntry.innerHTML = `
+            bookEntry.innerHTML = `
                 <label for="book">Book:</label>
                 <select name="book" required>
                     <option value="" disabled selected>Select Book</option>

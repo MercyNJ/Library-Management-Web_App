@@ -15,8 +15,8 @@ class IssuanceBooks(BaseModel, Base):
     books_id = Column(Integer, ForeignKey('books.id'), nullable=False)
     quantity = Column(Integer, nullable=False)
 
-    '''associated_book = relationship('Books')'''
-    issuance = relationship('Issuance', back_populates='issued_books', viewonly=True)
+    associated_book = relationship('Books')
+    '''issuance = relationship('Issuance', back_populates='issued_books', viewonly=True)'''
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -32,20 +32,20 @@ class Issuance(BaseModel, Base):
                             back_populates='issuances')
     statements = relationship('Statement', secondary='issuance_statement',
                               back_populates='issuances')
-    issued_books = relationship('IssuanceBooks', back_populates='issuance', cascade="all, delete, delete-orphan")
+    issued_books = relationship('IssuanceBooks', backref='issuance', cascade="all, delete, delete-orphan")
 
 
-    def __init__(self, member_id, due_date,
-                 books_borrowed, contact_number, total_fee,
-                 books=None):
-        """Initializes the issuance"""
-        super().__init__()
-        self.member_id = member_id
-        self.due_date = due_date
-        self.books_borrowed = books_borrowed
-        self.contact_number = contact_number
-        self.books = books or []
-        self.total_fee = total_fee
+def __init__(self, member_id, due_date,
+        books_borrowed, contact_number, total_fee,
+        books=None):
+    """Initializes the issuance"""
+    super().__init__()
+    self.member_id = member_id
+    self.due_date = due_date
+    self.books_borrowed = books_borrowed
+    self.contact_number = contact_number
+    self.books = books or []
+    self.total_fee = total_fee
 
     def issuance_status(self):
         """Update the status of the issuance based on due date."""
