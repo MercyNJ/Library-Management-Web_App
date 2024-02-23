@@ -41,12 +41,12 @@
             <tbody>
                 {% for bookz in list_books %}
                     <tr>
-                        <td>{{ bookz.books.name }}</td>
+                        <td>{{ bookz.associated_book.name }}</td>
                         <td>{{ bookz.quantity }}</td>
                     </tr>
                 {% endfor %}
                 
-                {% set empty_rows = 10 - (issuance_bookz|length) %}
+                {% set empty_rows = 10 - ( issuance_issued_books|length) %}
                 {% if empty_rows > 0 %}
                     {% for _ in range(empty_rows) %}
                         <tr>

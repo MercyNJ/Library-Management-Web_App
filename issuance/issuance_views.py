@@ -178,10 +178,10 @@ def update_issuance_form(issuance_id):
                     book = models.storage.get(Books, int(book_id))
                     if book:
                         list_books = issuance.issued_books
-                        old_quantity = next((ib.quantity for ib in list_books if ib.book_id == int(book_id)), 0)
+                        old_quantity = next((ib.quantity for ib in list_books if ib.books_id == int(book_id)), 0)
                         quantity_difference = int(order) - old_quantity
                         new_issuance_book = IssuanceBooks(
-                            issuance_id=issuance.id, book_id=book.id,
+                            issuance_id=issuance.id, books_id=book.id,
                             quantity=int(order))
                         new_issuance_book.save()
                         
