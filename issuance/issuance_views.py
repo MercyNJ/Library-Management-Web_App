@@ -14,7 +14,7 @@ from . import issuance_bp
 
 
 def check_status():
-    """Checks the status of an issuance."""
+    """Checks the status of an issuance & calculate late fee"""
     try:
         all_issuances = storage.all(Issuance).values()
         current_date = date.today()
@@ -22,9 +22,11 @@ def check_status():
             if issuance.return_status != "returned" \
                     and issuance.due_date < current_date:
                 issuance.return_status = "overdue"
+                issuance.calculate_total_fee()
                 issuance.save()
             elif issuance.return_status != "returned":
                 issuance.return_status = "borrowed"
+                issuance.calculate_total_fee()
                 issuance.save()
     except Exception as e:
         return "Error: {}" .format(str(e))
@@ -142,6 +144,7 @@ def update_issuance_form(issuance_id):
         if request.method == 'POST':
             if issuance:
                 # Retrieve updated values from the form
+                return_status = request.form.get('return_status')
                 member_id = int(request.form.get('member'))
                 book_ids = request.form.getlist('book')
                 orders = request.form.getlist('quantity')
@@ -161,6 +164,7 @@ def update_issuance_form(issuance_id):
                         return "Book not found"
 
                 # Update issuance details
+                issuance.return_status = return_status
                 issuance.member_id = member.id
                 issuance.books = [models.storage.get(Books, int(book_id)) for book_id in book_ids]
                 issuance.contact_number = member.contact
@@ -187,6 +191,14 @@ def update_issuance_form(issuance_id):
                         
                         book.reduce_stock(quantity_difference)
                         models.storage.save()
+
+                # Update current stock after a book return
+                if issuance.return_status == "returned":
+                    for book_id, order in zip(book_ids, orders):
+                        book = models.storage.get(Books, int(book_id))
+                        if book:
+                            book.current_stock += int(order)
+                            models.storage.save()
 
                 return redirect(url_for('issuance.view_issuances'))
             else:

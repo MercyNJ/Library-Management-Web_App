@@ -46,8 +46,6 @@
                     <th>Member Name</th>
                     <th>Date</th>
                     <th>Total Fee</th>
-                    <th>Actions</th>
-                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,9 +61,9 @@
                     </tr>
                 {% endfor %}
             </tbody>
-        </table>
+	</table><br><br>
         <div class="totalFee">
-            <div>TOTAL OUTSTANDING FEE: {{ total_fee }}</div>
+            <div>TOTAL OUTSTANDING FEE: {{  outstanding_fee }}</div>
         </div>
     </div>
     <footer>
