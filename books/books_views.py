@@ -20,6 +20,27 @@ def view_books():
         return error_message, 500
 
 
+@books_bp.route('/search_books', methods=['POST'])
+@login_required
+def search_books():
+    """Handle book search by name or author."""
+    try:
+        search_term = request.form.get('search')
+        if search_term:
+            books = storage.all(Books).values()
+            filtered_books = []
+            for book in books:
+                if search_term.lower() in book.name.lower() or search_term.lower() in book.author.lower():
+                    filtered_books.append(book)
+        else:
+            filtered_books = storage.all(Books).values()
+        books = sorted(filtered_books, key=lambda k: k.id)
+        return render_template('view_books.html', books=books)
+    except Exception as e:
+        error_message = "Error searching books: {}".format(str(e))
+        return error_message, 500
+
+
 
 @books_bp.route(
     '/add_book_form', methods=['GET', 'POST'],

@@ -2,7 +2,7 @@
 form {
   max-width: 400px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -11,15 +11,15 @@ form {
 /* Style form labels */
 label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-weight: bold;
 }
 
 /* Style form input fields */
 input {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
+  padding: 5px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -28,7 +28,7 @@ input {
 button {
   background-color: #007bff;
   color: #fff;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -54,4 +54,10 @@ button:hover {
 /* Add some hover effect to the "Add Books" button */
 #add-books:hover {
   background-color: #0056b3;
+}
+
+/* Style the search container div */
+.search-container {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
