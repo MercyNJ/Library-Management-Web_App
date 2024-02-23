@@ -18,6 +18,31 @@ def view_members():
     except Exception as e:
         return "Error fetching member data: {}".format(str(e))
 
+
+@members_bp.route('/search_members', methods=['POST'])
+@login_required
+def search_members():
+    """Handle members search by name or id."""
+    try:
+        search_term = request.form.get('search')
+        if search_term:
+            if search_term.isdigit():
+                member_id = int(search_term)
+                member = storage.get(Members, member_id)
+                filtered_members = [member] if member else []
+            else:
+                members = storage.all(Members).values()
+                filtered_members = [member for member in members if search_term.lower() in member.name.lower()]
+        else:
+            filtered_members = storage.all(Members).values()
+
+        members = sorted(filtered_members, key=lambda k: k.id)
+        return render_template('view_members.html', members=members)
+    except Exception as e:
+        error_message = "Error searching member: {}".format(str(e))
+        return error_message, 500
+
+
 @members_bp.route(
     '/add_member_form', methods=['GET', 'POST'],
     strict_slashes=False)
