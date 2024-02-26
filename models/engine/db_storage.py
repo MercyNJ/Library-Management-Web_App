@@ -25,8 +25,16 @@ class DBStorage:
         HOST = getenv('LIB_MYSQL_HOST')
         DB = getenv('LIB_MYSQL_DB')
         ENV = getenv('LIB_ENV')
+
+        SQLALCHEMY_ENGINE_OPTIONS = {
+            'pool_recycle': 280,
+            'pool_pre_ping': True
+        }
+
         self.__engine = create_engine(
-            f'mysql+mysqldb://{USER}:{PWD}@{HOST}/{DB}')
+            f'mysql+mysqldb://{USER}:{PWD}@{HOST}/{DB}',
+            **SQLALCHEMY_ENGINE_OPTIONS)
+
         if ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
