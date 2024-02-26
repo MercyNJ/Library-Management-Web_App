@@ -57,7 +57,13 @@ def create_issuance():
             book_ids = request.form.getlist('book')
             orders = request.form.getlist('quantity')
             total_fee = float(request.form.get('total_fee', 0.0))
+
             member = models.storage.get(Members, member_id)
+            if not member:
+                return "Member not found."
+            if not member.can_make_issuance():
+                return "Member is not eligible for issuance."
+
             books = []
             quantities = []
             for book_id, order in zip(book_ids, orders):
