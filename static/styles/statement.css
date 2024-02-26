@@ -53,6 +53,14 @@ img {
   margin-top: 20px;
 }
 
+.total-fee .text {
+	color: #4B0082;
+}
+
+.total-fee .fee {
+	color: #8B0000;
+}
+
 
 a[href="download_statement_pdf"], button {
   display: block;

@@ -3,9 +3,7 @@
 {% block head %}
     <title>STATEMENT OF REMINDER: OUTSTANDING ISSUANCES</title>
     <link rel="stylesheet" type="text/css" href="../static/styles/table.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/footer.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/navigation.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/common.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 
@@ -36,6 +34,8 @@
                 </tr>
             {% endfor %}
         </tbody>
-    </table>
-    <a href="{{ url_for('statement.generate_statement', issuances=issuances.id, member_id=member.id) }}">Generate Statement</a>
+    </table><br>
+    <div class="link-container">
+	    <a href="{{ url_for('statement.generate_statement', issuances=issuances.id, member_id=member.id) }}" class="link-with-border">Generate Statement</a>
+    </div>
 {% endblock %}

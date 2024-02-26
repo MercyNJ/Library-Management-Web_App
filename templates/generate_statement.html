@@ -47,24 +47,12 @@
                 {% endfor %}
             </tbody>
 	</table><br>
-        <div class="total-fee">Total Outstanding Fee: {{ statement.outstanding_fee }}</div>
+	<div class="total-fee">
+		<span class="text">Total Outstanding Fee:</span>
+		<span class="fee">{{ statement.outstanding_fee }}</span>
+	</div>
     </div><br><br><br>
  
     <a href="{{ url_for('statement.download_statement_pdf', statement_id=statement.id) }}">Download Statement</a>
-    <button onclick="printStatement()">Print Statement</button>
-    <script>
-    	function printStatement() {
-            var statementContainer = document.getElementById('statement-container');
-            var contentToPrint = statementContainer.cloneNode(true); // Clone the statement-container
-            var newWindow = window.open('', '_blank'); // Open a new window or create an iframe
-
-            newWindow.document.write(contentToPrint.innerHTML);
-            newWindow.document.write('</body></html>');
-
-            newWindow.document.close();
-            newWindow.print();
-            newWindow.close();
-        }
-    </script>
 </body>
 </html>
