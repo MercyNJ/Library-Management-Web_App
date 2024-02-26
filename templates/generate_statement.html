@@ -45,7 +45,8 @@
 		<span class="text">Total Outstanding Fee:</span>
 		<span class="fee">{{ statement.outstanding_fee }}</span>
 	</div>
-    </div><br><br><br>
+    </div><br>
+
  
     <a href="{{ url_for('statement.download_statement_pdf', statement_id=statement.id) }}">Download Statement</a>
 </body>

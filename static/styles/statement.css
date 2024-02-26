@@ -76,15 +76,6 @@ a[href="download_statement_pdf"], button {
 
 }
 
-button {
-  position: fixed;
-  top: 80%;
-}
-a {
-  position: fixed;
-  top: 75%;
-}
-
 
 a[href="download_statement_pdf"]:hover, button:hover {
   background-color: #0056b3;
