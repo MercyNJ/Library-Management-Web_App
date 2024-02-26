@@ -46,9 +46,10 @@
                     </tr>
                 {% endfor %}
             </tbody>
-        </table>
+	</table><br>
         <div class="total-fee">Total Outstanding Fee: {{ statement.outstanding_fee }}</div>
-    </div>
+    </div><br><br><br>
+ 
     <a href="{{ url_for('statement.download_statement_pdf', statement_id=statement.id) }}">Download Statement</a>
     <button onclick="printStatement()">Print Statement</button>
     <script>

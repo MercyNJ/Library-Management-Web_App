@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>REMINDER: OUTSTANDING ISSUANCES</h1>
+    <h1>OUTSTANDING ISSUANCES</h1>
     <form method="POST" action="{{ url_for('statement.search_open_issuances') }}">
     	<input type="text" name="search" placeholder="Search by member name or ID">
     	<input type="submit" value="Search">

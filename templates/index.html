@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/footer.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/images.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -17,13 +18,13 @@
                 <li><a href="{{ url_for('user.members_listing') }}">View Members</a></li>
                 <li><a href="{{ url_for('user.books_listing') }}">View Books</a></li>
                 <li>
-                    <a href="/issuances">Make an Issuance</a>
+                    <a href="/issuances">Issue Books</a>
                     <ul>
                         <li><a href="{{ url_for('user.issuance_listing') }}">View Issuances</a></li>
-                        <li><a href="/create_invoice">Add an Issuance</a></li>
+                        <li><a href="/create_invoice">Issue a Book</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ url_for('user.statement_listing') }}">Open Issuances</a></li>
+                <li><a href="{{ url_for('user.statement_listing') }}">Active Issuances</a></li>
                 <li><a href="{{ url_for('user.change_password') }}">Change Password</a></li>
                 <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
             </ul>
@@ -31,7 +32,7 @@
 
         <div class="main-content">
             <h1>Welcome {{ user.username }}</h1>
-            <img src="../static/images/libraryhome.jpg" alt="Library Management homepage">
+            <img src="../static/images/libraryhome.jpg" alt="Library Management homepage" id="libraryhome">
         </div>
     </div>
     <footer>
