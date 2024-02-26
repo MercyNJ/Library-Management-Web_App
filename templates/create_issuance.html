@@ -1,32 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "base.html" %}
+
+{% block head %}
     <title>Create Issuance</title>
     <link rel="stylesheet" type="text/css" href="../static/styles/create_form.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/navigation.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <header>
-        <nav class="horizontal-nav">
-	    <ul>
-		<li><a href="/">Home</a></li>
-                <li><a href="{{ url_for('user.members_listing') }}">View Members</a></li>
-                <li><a href="{{ url_for('user.books_listing') }}">View Books</a></li>
-                <li class="has-submenu">
-                    <a href="/issuances">Make an Issuance</a>
-                    <ul class="submenu">
-                        <li><a href="{{ url_for('user.issuance_listing') }}">View Issuances</a></li>
-                        <li><a href="/create_issuance">Add an Issuance</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{ url_for('user.statement_listing') }}">Open Issuances</a></li>
-                <li><a href="{{ url_for('user.change_password') }}">Change Password</a></li>
-                <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
-            </ul>
-        </nav>
-    </header>	
+{% endblock %}
+
+{% block content %}
     <h1>Create New Issuance</h1>
 
     <form id="createIssuanceForm" method="post" action="{{ url_for('issuance.create_issuance') }}">
@@ -63,6 +43,7 @@
         
         <button type="submit">Save Issuance</button>
     </form>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
     	var addButton = document.getElementById('add-book');
@@ -97,5 +78,4 @@
         });
     });
     </script>
-</body>
-</html>
+{% endblock %}

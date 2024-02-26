@@ -1,36 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "base.html" %}
+
+{% block head %}
     <title>Add New Member</title>
     <link rel="stylesheet" type="text/css" href="../static/styles/form.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/footer.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/navigation.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <header>
-        <nav class="horizontal-nav">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="{{ url_for('user.members_listing') }}">View Members</a></li>
-                <li><a href="{{ url_for('user.books_listing') }}">View Books</a></li>
-                <li class="has-submenu">
-                    <a href="/issuances">Make an issuance</a>
-                    <ul class="submenu">
-                        <li><a href="{{ url_for('user.issuance_listing') }}">View Issuances</a></li>
-                        <li><a href="/create_issuance">Add an Issuance</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{ url_for('user.statement_listing') }}">Open Issuances</a></li>
-                <li><a href="{{ url_for('user.change_password') }}">Change Password</a></li>
-                <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
-            </ul>
-        </nav>
-    </header>	
+{% endblock %}
+
+{% block content %}
     <h1>Add New Member</h1>
     <form id="addMembersForm" method="post" action="{{ url_for('members.add_member_form') }}">
-        <label for="member_name">Name:</label>
+	<label for="member_name">Name:</label>
         <input type="text" name="member_name" required><br>
         <label for="member_email">Email:</label>
         <input type="email" name="member_email" required><br>
@@ -38,8 +18,4 @@
         <input type="text" name="member_contact" required><br>
         <button type="submit">Add Member</button>
     </form>
-    <footer>
-      <p>&copy; 2024 Library Management. All rights reserved</p>
-    </footer>
-</body>
-</html>
+{% endblock %}

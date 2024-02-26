@@ -1,35 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "base.html" %}
+
+{% block head %}
     <title>View Outstanding Issuances</title>
     <link rel="stylesheet" type="text/css" href="../static/styles/table.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/form.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/footer.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/common.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/navigation.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <header>
-        <nav class="horizontal-nav">
-		<ul>
-		<li><a href="/">Home</a></li>
-                <li><a href="{{ url_for('user.members_listing') }}">View Members</a></li>
-                <li><a href="{{ url_for('user.books_listing') }}">View Books</a></li>
-                <li class="has-submenu">
-                    <a href="/issuances">Make an Issuance</a>
-                    <ul class="submenu">
-                        <li><a href="{{ url_for('user.issuance_listing') }}">View Issuances</a></li>
-                        <li><a href="/create_issuance">Add an Issuance</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{ url_for('user.statement_listing') }}">Open Issuances</a></li>
-                <li><a href="{{ url_for('user.change_password') }}">Change Password</a></li>
-                <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
-            </ul>
-        </nav>
-    </header>	
+{% endblock %}
+
+{% block content %}
     <h1>REMINDER: OUTSTANDING ISSUANCES</h1>
     <form method="POST" action="{{ url_for('statement.search_open_issuances') }}">
     	<input type="text" name="search" placeholder="Search by member name or ID">
@@ -66,8 +45,4 @@
             <div>TOTAL OUTSTANDING FEE: {{  outstanding_fee }}</div>
         </div>
     </div>
-    <footer>
-      <p>&copy; 2024 Library Management. All rights reserved</p>
-    </footer>
-</body>
-</html>
+{% endblock %}

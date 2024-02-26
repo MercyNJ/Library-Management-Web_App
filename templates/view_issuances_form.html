@@ -1,34 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends "base.html" %}
+
+{% block head %}
     <title>View Issuances</title>
     <link rel="stylesheet" type="text/css" href="../static/styles/table.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/footer.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/common.css">
-    <link rel="stylesheet" type="text/css" href="../static/styles/navigation.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <header>
-        <nav class="horizontal-nav">
-	    <ul>
-		<li><a href="/">Home</a></li>
-                <li><a href="{{ url_for('user.members_listing') }}">View Members</a></li>
-                <li><a href="{{ url_for('user.books_listing') }}">View Books</a></li>
-                <li class="has-submenu">
-                    <a href="/issuances">Make an Issuance</a>
-                    <ul class="submenu">
-                        <li><a href="{{ url_for('user.issuance_listing') }}">View Issuances</a></li>
-                        <li><a href="/create_issuance">Add an Issuance</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{ url_for('user.statement_listing') }}">Open Issuances</a></li>
-                <li><a href="{{ url_for('user.change_password') }}">Change Password</a></li>
-                <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
-            </ul>
-        </nav>
-    </header>	
+{% endblock %}
+
+{% block content %}
     <h1>View Issuances</h1>
     <div class="content">
         <table>
@@ -74,9 +53,6 @@
         </table>
         <a href="{{ url_for('issuance.create_issuance') }}">Create Issuance</a>
     </div>
-    <footer>
-      <p>&copy; 2024 Library Management. All rights reserved</p>
-    </footer>
     
     <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -99,5 +75,4 @@
         }
     });
     </script>
-</body>
-</html>
+{% endblock %}
