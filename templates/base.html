@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="../static/styles/navigation.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
+</head>
+<body>
+    <header>
+        <nav class="horizontal-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="{{ url_for('user.members_listing') }}">View Members</a></li>
+                <li><a href="{{ url_for('user.books_listing') }}">View Books</a></li>
+                <li class="has-submenu">
+                    <a href="/issuances">Make an Issuance</a>
+                    <ul class="submenu">
+                        <li><a href="{{ url_for('user.issuance_listing') }}">View Issuances</a></li>
+                        <li><a href="/create_issuance">Add an Issuance</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ url_for('user.statement_listing') }}">Open Issuances</a></li>
+                <li><a href="{{ url_for('user.change_password') }}">Change Password</a></li>
+                <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% block content %}
+    {% endblock %}
+    <footer>
+        <p>&copy; 2024 Library Management. All rights reserved</p>
+    </footer>
+</body>
+</html>
