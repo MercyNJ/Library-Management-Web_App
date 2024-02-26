@@ -35,6 +35,8 @@ class Books(BaseModel, Base):
                         if issuance.return_status == "returned")
         self.current_stock = \
                 (self.original_stock - total_issued_quantity) + total_returned_quantity
+
+        self.current_stock = min(self.current_stock, self.original_stock)
         if self.current_stock < 0:
             self.current_stock = 0
 
