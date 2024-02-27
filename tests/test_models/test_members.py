@@ -65,27 +65,21 @@ class TestMembers(unittest.TestCase):
     def test_total_borrowed_books(self):
         """Test total_borrowed_books hybrid property"""
         member = Members()
-        # Create Issuance objects representing borrowed books
         issuance1 = Issuance(member_id=member.id, due_date="2024-02-27", books_borrowed="Book1", contact_number="123456789", total_fee=0)
         issuance2 = Issuance(member_id=member.id, due_date="2024-02-28", books_borrowed="Book2", contact_number="123456789", total_fee=0)
 
-    # Add Issuance objects to the member's issuances relationship
         member.issuances.append(issuance1)
         member.issuances.append(issuance2)
 
-    # Test total_borrowed_books property
         self.assertEqual(member.total_borrowed_books, 2)
 
     def test_total_fee_due(self):
         """Test total_fee_due hybrid property"""
         member = Members()
-    # Create Issuance objects representing borrowed books with fees
         issuance1 = Issuance(member_id=member.id, due_date="2024-02-27", books_borrowed="Book1", contact_number="123456789", total_fee=50)
         issuance2 = Issuance(member_id=member.id, due_date="2024-02-28", books_borrowed="Book2", contact_number="123456789", total_fee=100)
 
-    # Add Issuance objects to the member's issuances relationship
         member.issuances.append(issuance1)
         member.issuances.append(issuance2)
 
-    # Test total_fee_due propertydd
         self.assertEqual(member.total_fee_due, 150)
