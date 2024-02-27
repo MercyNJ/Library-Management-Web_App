@@ -18,4 +18,5 @@ class IssuanceBooks(BaseModel, Base):
     associated_book = relationship('Books')
 
     def __init__(self, *args, **kwargs):
+        """Initialization method"""
         super().__init__(*args, **kwargs)
