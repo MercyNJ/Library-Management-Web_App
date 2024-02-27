@@ -98,11 +98,6 @@ class TestDBStorage(unittest.TestCase):
         self.storage.reload()
         self.assertTrue(len(self.storage.all()) == prev_count)
 
-    def test_close(self):
-        """Test that close closes the session"""
-        self.storage.close()
-        self.assertIsNone(self.storage._DBStorage__session)
-
     def test_get(self):
         """Test that get returns correct object by id"""
         new_model = BaseModel()

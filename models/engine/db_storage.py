@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+Module for the database class.
+"""
+
 import models
 from models.base_model import BaseModel, Base
 from models.books import Books
@@ -16,10 +20,12 @@ classes = {"Members": Members, "Books": Books, "Issuance": Issuance,
 
 
 class DBStorage:
+    """Sets up class interaction with MySql Database"""
     __engine = None
     __session = None
 
     def __init__(self):
+        """Initialization method"""
         USER = getenv('LIB_MYSQL_USER')
         PWD = getenv('LIB_MYSQL_PWD')
         HOST = getenv('LIB_MYSQL_HOST')
@@ -39,6 +45,7 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
+        """Retrive all objects of a class"""
         new_dict = {}
         for clss in classes:
             if cls is None or cls is classes[clss] or cls is clss:
