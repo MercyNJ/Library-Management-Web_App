@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>LibraWeb</h1>
-  <img src="../static/images/libraryhome.jpg" alt="Home Image" class="image">
+  <img src="./static/images/libraryhome.jpg" alt="Home Image" class="image">
   <h2>Introduction</h2>
   <p>Welcome to Libra Web, a web application meticulously crafted to cater to the unique needs of a single library and its librarian. The primary goal of this project is to automate and streamline essential operational processes, including members and books management, book issuance, and the generation of statements for reminder purposes. Libra Web offers an efficient and user-friendly solution tailored specifically for this library, ensuring a seamless experience for the librarian in managing day-to-day operations.</p>
     
@@ -32,26 +32,26 @@
    <p>The web app allows the librarian to perform 4 main functions in regards to streamlining operations:</p>
    <h3>Members Records Management:</h3>
    <p>This functionality enables the librarian effortless access, addition, and removal of library members, optimizing operational efficiency. The web app replaces manual record-keeping with a modern, efficient solution for a seamless user experience.</p>
-   <img src="../static/images/viewmembers.png" alt="LibraWeb members">
+   <img src="./static/images/viewmembers.png" alt="LibraWeb members">
 
    <h3>Books Record management:</h3>
    <p>Similar to the members management function, the web application provides a streamlined process for the librarian to view all the books available, add new books, and delete book records as needed</p>
-   <img src="../static/images/viewbooks.png" alt="LibraWeb books">
+   <img src="./static/images/viewbooks.png" alt="LibraWeb books">
 
    <h3>Issuance Creation:</h3>
    <p>Within the web app, the librarian can effortlessly issue books. The process involves selecting a member from a dropdown menu, specifying books and quantities & setting a due date A warning is triggered if the selected quantity exceeds the available book stock, ensuring precision in both book issuance and books stock management.</p>
-   <img src="../static/images/newissuance.png" alt="LibraWeb issuance">
+   <img src="./static/images/newissuance.png" alt="LibraWeb issuance">
 
    <h3>Statements of Reminder Generation:</h3>
    <p>Utilizing the web app, the librarian can effortlessly access a compilation of all active issuances, encompassing issuances whose return status is either overdue or borrowed. Additionally, the librarian can filter for active issuances pertaining to a specific member by either their ID or name. With this information, generating a statement of reminder for the chosen member is a straightforward process—simply by clicking the "Generate Statement" button.</p>
-   <img src="../static/images/newstatement.png" alt="LibraWeb statement">
+   <img src="./static/images/newstatement.png" alt="LibraWeb statement">
 
    <h2>Usage:</h2>
    <p>As this web application is currently tailored for a specific library, its use requires authentication. Upon accessing the designated domain in the browser, the librarian is directed to the initial login page where they must authenticate with their credentials. Additionally, they have the capability to change their password during this login process.</p>
-   <img src="../static/images/login.png" alt="LibraWeb login">
+   <img src="./static/images/login.png" alt="LibraWeb login">
 
    <p>Once successfully logged in, they gain access to the home page, where a sidebar menu facilitates easy navigation to various sections of the web application. From the home page, the librarian can efficiently manage members and books records, create new entries, issue books and generate statements of reminder as needed. Furthermore, the option to download the issuance records or statements is readily available for their convenience.</p>
-   <img src="../static/images/welcomehome.png" alt="LibraWeb welcome">
+   <img src="./static/images/welcomehome.png" alt="LibraWeb welcome">
 
    <h2>Technical Challenges Overcome</h2>
    <h3>Handling many-to-many data models relationships</h3>
