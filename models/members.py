@@ -10,8 +10,8 @@ class Members(BaseModel, Base):
     """define a member model"""
     __tablename__ = 'members'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(128), nullable=False, unique=True)
-    email = Column(String(128), nullable=False, unique=True)
+    name = Column(String(128), nullable=False)
+    email = Column(String(128), nullable=False)
     contact = Column(String(13), nullable=False)
     total_fee_due = Column(Float, nullable=False, default=0.0)
     issuances = relationship('Issuance', backref='members',
