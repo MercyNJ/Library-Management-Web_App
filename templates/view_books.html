@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="../static/styles/form.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/table.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 
@@ -39,10 +40,10 @@
                     <td>{{ book.original_stock|int }}</td>
                     <td>{{ book.current_stock|int }}</td>
                     <td>
-                        <a href="{{ url_for('books.update_book_form', book_id=book.id) }}">Edit</a>
+                        <a href="{{ url_for('books.update_book_form', book_id=book.id) }}"><i class="fas fa-edit"></i></a>
                     </td>
                     <td>
-                            <a href="#" onclick="confirmDelete('{{ url_for('books.delete_book', book_id=book.id) }}')">Delete</a>
+                            <a href="#" onclick="confirmDelete('{{ url_for('books.delete_book', book_id=book.id) }}')"><i class="fas fa-trash-alt"></i></a>
                         </td>
                 </tr>
             {% endfor %}

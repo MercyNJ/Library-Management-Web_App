@@ -4,6 +4,7 @@
     <title>View Issuances</title>
     <link rel="stylesheet" type="text/css" href="../static/styles/table.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 
@@ -37,14 +38,14 @@
                         <td>{{ issuance.created_at }}</td>
                         <td>
                             <a href="#" class="delete-link" data-issuance-id="{{
-                            issuance.id }}">Delete</a>
+                            issuance.id }}"><i class="fas fa-trash-alt"></i></a>
                         </td>
                         <td>
-                            <a href="{{ url_for('issuance.view_issuance_template', issuance_id=issuance.id) }}">View</a>
+                            <a href="{{ url_for('issuance.view_issuance_template', issuance_id=issuance.id) }}"><i class="fas fa-eye"></i></a>
                         </td>
                         
                         <td>
-                            <a href="{{ url_for('issuance.update_issuance_form', issuance_id=issuance.id) }}">Update</a>
+                            <a href="{{ url_for('issuance.update_issuance_form', issuance_id=issuance.id) }}"><i class="fas fa-pencil-alt"></i></a>
                         </td>
                     </tr>
                 {% endfor %}

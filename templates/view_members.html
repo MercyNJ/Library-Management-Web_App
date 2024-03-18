@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="../static/styles/form.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/table.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 
@@ -39,11 +40,11 @@
                         <td>{{ member.contact }}</td>
                         <td>{{ member.total_fee_due }}</td>
                         <td>
-                            <a href="{{ url_for('members.update_member_form', member_id=member.id) }}">Edit</a>
+                            <a href="{{ url_for('members.update_member_form', member_id=member.id) }}"><i class="fas fa-edit"></i></a>
                         </td>
                         <td>
                             <a href="#" class="delete-link" data-member-id="{{
-                            member.id }}">Delete</a>
+                            member.id }}"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 {% endfor %}
