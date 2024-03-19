@@ -15,6 +15,7 @@ class IssuanceBooks(BaseModel, Base):
     books_id = Column(Integer, ForeignKey('books.id'), nullable=False)
     quantity = Column(Integer, nullable=False)
 
+    # Allow access of associated book details from IssuanceBooks instances
     associated_book = relationship('Books')
 
     def __init__(self, *args, **kwargs):
