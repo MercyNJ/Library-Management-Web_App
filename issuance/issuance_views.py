@@ -156,7 +156,7 @@ def update_issuance_form(issuance_id):
                 orders = request.form.getlist('quantity')
                 total_fee = request.form.get('total_fee') or 0
 
-                # Fetch the member and existing books for the invoice
+                # Fetch the member for the issuance
                 member = models.storage.get(Members, member_id)
 
                 # Calculate books borrowed
